@@ -909,5 +909,46 @@ footer a {
 
 </footer>
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("registration");
+  if (!form) return;
+
+  const button = form.querySelector('button[type="submit"]');
+
+  const message = document.createElement("p");
+  message.setAttribute("role", "alert");
+  message.style.cssText =
+    "display:none;background:#fff0f3;color:#a70d2a;" +
+    "padding:16px;border-radius:12px;font-weight:bold;" +
+    "text-align:center;margin:15px 0;";
+
+  button.parentNode.insertBefore(message, button);
+
+  button.addEventListener("click", function () {
+    const invalid = Array.from(form.elements).find(function(field) {
+      return field.willValidate && !field.validity.valid;
+    });
+
+    if (invalid) {
+      message.textContent =
+        "Veuillez vérifier les champs obligatoires. " +
+        "Le code fiscal doit contenir 16 caractères " +
+        "et les deux cases obligatoires doivent être cochées.";
+      message.style.display = "block";
+      invalid.focus();
+      invalid.reportValidity();
+    } else {
+      message.style.display = "none";
+    }
+  });
+
+  form.addEventListener("submit", function() {
+    button.disabled = true;
+    button.textContent = "Envoi en cours…";
+  });
+});
+</script>
+
 </body>
 </html>
