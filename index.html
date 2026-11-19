@@ -7,6 +7,9 @@
 
 <title>Apéro-conversation | Alliance Française de la Vallée d’Aoste</title>
 
+<meta name="description"
+content="Inscrivez-vous à l'Apéro-conversation du 27 novembre 2026 à Aoste.">
+
 <style>
 :root {
   --bleu: #334995;
@@ -91,9 +94,7 @@ nav a {
   font-weight: bold;
 }
 
-.heure {
-  font-size: 24px;
-}
+.heure { font-size: 24px; }
 
 .hero-photo {
   width: 100%;
@@ -335,13 +336,27 @@ input:not([type="checkbox"]) {
   cursor: pointer;
 }
 
-.message-test {
-  color: #a70d2a;
-  background: #fff1f3;
+.envoi:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.message {
   border-radius: 12px;
   padding: 15px;
   text-align: center;
   font-weight: bold;
+  margin: 18px 0;
+}
+
+.message.succes {
+  background: #e7f5e9;
+  color: #216138;
+}
+
+.message.erreur {
+  background: #fff1f3;
+  color: #a70d2a;
 }
 
 footer {
@@ -359,16 +374,10 @@ footer a { color: white; }
     grid-template-columns: 1fr;
   }
 
-  .hero-photo {
-    height: 280px;
-  }
-
+  .hero-photo { height: 280px; }
   .hero h1 { font-size: 49px; }
-
   .logo { height: 105px; }
-
   .champs { grid-template-columns: 1fr; }
-
   .formulaire-zone { padding: 18px; }
   .formulaire { padding: 20px; }
   .bienvenue { padding: 23px; }
@@ -392,7 +401,6 @@ footer a { color: white; }
 <body>
 
 <header>
-  <!-- IMMAGINE NELLA CARTELLA PRINCIPALE -->
   <img
     class="logo"
     src="./entete-alliance.jpg"
@@ -432,7 +440,6 @@ footer a { color: white; }
   </div>
 
   <div>
-    <!-- FOTO GIOVANI NELLA CARTELLA PRINCIPALE -->
     <img
       class="hero-photo"
       src="./apero-jeunes.jpg"
@@ -628,54 +635,86 @@ footer a { color: white; }
     à l’Apéro-conversation du 27 novembre 2026.
   </p>
 
-  <p class="message-test">
-    Version de démonstration :
-    les inscriptions en ligne ne sont pas encore activées.
-    Aucun renseignement n’est transmis.
-  </p>
+  <form
+    class="formulaire"
+    id="registration"
+    action="https://formspree.io/f/mjywoyre"
+    method="POST"
+  >
 
-  <form class="formulaire" id="registration">
+    <input
+      type="hidden"
+      name="evenement"
+      value="Apéro-conversation du 27 novembre 2026"
+    >
+
+    <input
+      type="hidden"
+      name="_subject"
+      value="Nouvelle demande d'inscription - Apéro-conversation"
+    >
 
     <div class="champs">
       <label>
         Nom *
-        <input type="text" name="nom" required>
+        <input type="text"
+               name="nom"
+               autocomplete="family-name"
+               required>
       </label>
 
       <label>
         Prénom *
-        <input type="text" name="prenom" required>
+        <input type="text"
+               name="prenom"
+               autocomplete="given-name"
+               required>
       </label>
     </div>
 
     <div class="champs">
       <label>
         Adresse électronique *
-        <input type="email" name="email" required>
+        <input type="email"
+               name="email"
+               autocomplete="email"
+               required>
       </label>
 
       <label>
         Numéro de téléphone *
-        <input type="tel" name="telephone" required>
+        <input type="tel"
+               name="telephone"
+               autocomplete="tel"
+               required>
       </label>
     </div>
 
     <div class="champs un">
       <label>
         Adresse postale *
-        <input type="text" name="adresse" required>
+        <input type="text"
+               name="adresse"
+               autocomplete="street-address"
+               required>
       </label>
     </div>
 
     <div class="champs">
       <label>
         Code postal *
-        <input type="text" name="code_postal" required>
+        <input type="text"
+               name="code_postal"
+               autocomplete="postal-code"
+               required>
       </label>
 
       <label>
         Ville *
-        <input type="text" name="ville" required>
+        <input type="text"
+               name="ville"
+               autocomplete="address-level2"
+               required>
       </label>
     </div>
 
@@ -686,12 +725,16 @@ footer a { color: white; }
                name="code_fiscal"
                minlength="16"
                maxlength="16"
+               autocapitalize="characters"
                required>
       </label>
     </div>
 
     <label class="consentement">
-      <input type="checkbox" required>
+      <input type="checkbox"
+             name="conditions_acceptees"
+             value="Oui"
+             required>
       <span>
         J’ai pris connaissance des modalités
         d’inscription et de paiement
@@ -700,24 +743,32 @@ footer a { color: white; }
     </label>
 
     <label class="consentement">
-      <input type="checkbox" required>
+      <input type="checkbox"
+             name="information_confidentialite_lue"
+             value="Oui"
+             required>
       <span>
         J’ai pris connaissance de
-        l’<a href="confidentialite.html" target="_blank" rel="noopener">
+        l’<a href="confidentialite.html"
+             target="_blank"
+             rel="noopener">
         information relative à la protection
         des données personnelles</a>. *
       </span>
     </label>
 
     <label class="consentement">
-      <input type="checkbox">
+      <input type="checkbox"
+             name="autorisation_photographique"
+             value="Oui">
       <span>
         J’autorise, à titre facultatif,
         l’utilisation de mon image pour les photographies
         et vidéos de l’événement, dans les conditions
         décrites dans
         l’<a href="autorisation-image.html"
-             target="_blank" rel="noopener">
+             target="_blank"
+             rel="noopener">
         autorisation photographique</a>.
       </span>
     </label>
@@ -726,14 +777,22 @@ footer a { color: white; }
       <strong>Important :</strong>
       après réception de vos données,
       notre administration vous adressera une facture.
-      Ne payez rien avant de l’avoir reçue.
+      <strong>Ne payez rien avant de l’avoir reçue.</strong>
+      Votre inscription ne sera définitivement confirmée
+      qu’après vérification du règlement.
     </div>
 
-    <button class="envoi" type="submit">
+    <button class="envoi"
+            type="submit"
+            id="submitButton">
       Envoyer ma demande d’inscription ➤
     </button>
 
-    <p id="status" class="message-test" role="status" hidden></p>
+    <p id="status"
+       class="message"
+       role="status"
+       aria-live="polite"
+       hidden></p>
 
     <small>
       * Champs obligatoires.
@@ -760,17 +819,73 @@ footer a { color: white; }
 </footer>
 
 <script>
-document.getElementById("registration")
-  .addEventListener("submit", function(event) {
-    event.preventDefault();
+const form = document.getElementById("registration");
+const statusMessage = document.getElementById("status");
+const submitButton = document.getElementById("submitButton");
 
-    const status = document.getElementById("status");
+form.addEventListener("submit", async function(event) {
+  event.preventDefault();
 
-    status.hidden = false;
-    status.textContent =
-      "Les inscriptions en ligne ne sont pas encore " +
-      "activées. Merci de contacter le secrétariat.";
-  });
+  if (!form.reportValidity()) return;
+
+  submitButton.disabled = true;
+  submitButton.textContent = "Envoi en cours…";
+
+  statusMessage.hidden = true;
+
+  try {
+    const formData = new FormData(form);
+
+    formData.set(
+      "autorisation_photographique",
+      form.elements["autorisation_photographique"].checked
+        ? "Oui"
+        : "Non"
+    );
+
+    const response = await fetch(
+      "https://formspree.io/f/mjywoyre",
+      {
+        method: "POST",
+        body: formData,
+        headers: {
+          "Accept": "application/json"
+        }
+      }
+    );
+
+    if (response.ok) {
+      statusMessage.className = "message succes";
+      statusMessage.hidden = false;
+
+      statusMessage.textContent =
+        "Votre demande d’inscription a bien été envoyée. " +
+        "Notre administration vous adressera une facture " +
+        "par courrier électronique. Merci de ne procéder " +
+        "à aucun paiement avant de l’avoir reçue. " +
+        "Votre inscription ne sera définitive " +
+        "qu’après vérification du règlement.";
+
+      form.reset();
+
+    } else {
+      throw new Error("Erreur d'envoi");
+    }
+
+  } catch (error) {
+    statusMessage.className = "message erreur";
+    statusMessage.hidden = false;
+
+    statusMessage.textContent =
+      "Une erreur est survenue lors de l’envoi. " +
+      "Veuillez réessayer ou contacter le secrétariat " +
+      "à secretariat@alliancefraoste.it.";
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent =
+      "Envoyer ma demande d’inscription ➤";
+  }
+});
 </script>
 
 </body>
